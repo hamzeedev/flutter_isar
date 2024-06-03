@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_isar/components/drawer.dart';
 import 'package:flutter_isar/model/note.dart';
 import 'package:flutter_isar/model/note_database.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 class NotesPage extends StatefulWidget {
@@ -94,36 +96,61 @@ class _NotesPageState extends State<NotesPage> {
     List<Note> currentNote = noteDatabase.currentNotes;
 
     return Scaffold(
-      appBar: AppBar(backgroundColor: Colors.amber,title: const Text('Notes'), ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: createNote,
-        child: const Icon(Icons.add),
+      
+      appBar: AppBar(elevation: 0,backgroundColor: Colors.transparent,foregroundColor: Theme.of(context).colorScheme.inversePrimary,),
+      
+      backgroundColor: Theme.of(context).colorScheme.surface,
+      
+      floatingActionButton: FloatingActionButton(onPressed: createNote,child: const Icon(Icons.add),),
+      
+      drawer: const MyDrawer(),
+      
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          //Heading
+           Padding(
+            padding: const EdgeInsets.only(left:25),
+            child: Text(
+              'Notes',
+              style: GoogleFonts.dmSerifText(
+                fontSize: 48,
+                color: Theme.of(context).colorScheme.inversePrimary,
+              ),
+              ),
+            ),
+
+          // Notes list
+          Expanded(
+          child: ListView.builder(
+            itemCount: currentNote.length,
+            itemBuilder: (context, index) {
+            // get individual note
+            final note = currentNote[index];
+            // list tile ui
+            return ListTile(
+              title: Text(note.text),
+              trailing: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  // edit button
+                  IconButton(
+                    onPressed: ()=> updateNotes(note),
+                    icon: const Icon(Icons.edit),
+                  ),
+                  // delete button
+                  IconButton(
+                    onPressed: ()=> deleteNote(note.id),
+                    icon: const Icon(Icons.delete),
+                  ),
+                ],
+              ),
+            );
+          }),
+        ),
+        ],
+        
       ),
-      body: ListView.builder(
-        itemCount: currentNote.length,
-        itemBuilder: (context, index) {
-        // get individual note
-        final note = currentNote[index];
-        // list tile ui
-        return ListTile(
-          title: Text(note.text),
-          trailing: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              // edit button
-              IconButton(
-                onPressed: ()=> updateNotes(note),
-                icon: const Icon(Icons.edit),
-              ),
-              // delete button
-              IconButton(
-                onPressed: ()=> deleteNote(note.id),
-                icon: const Icon(Icons.delete),
-              ),
-            ],
-          ),
-        );
-      }),
     );
   }
 }
