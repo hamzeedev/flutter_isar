@@ -41,6 +41,7 @@ dependencies:
   provider: ^6.1.2
   json_serializable: ^6.8.0
   google_fonts: ^6.2.1
+  popover: ^0.3.0+1
 
 dev_dependencies:
   analyzer: ^5.13.0
