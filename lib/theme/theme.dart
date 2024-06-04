@@ -5,10 +5,10 @@ import 'package:flutter/material.dart';
 ThemeData lightMode = ThemeData(
   brightness: Brightness.light,
   colorScheme: ColorScheme.light(
-    surface: Colors.grey.shade300,
-    primary: Colors.grey.shade200,
-    secondary: Colors.grey.shade400,
-    inversePrimary: Colors.grey.shade800,
+    surface: Colors.blueGrey.shade300,
+    primary: Colors.blueGrey.shade200,
+    secondary: Colors.blueGrey.shade400,
+    inversePrimary: Colors.blueGrey.shade800,
   )
 );
 
@@ -16,9 +16,9 @@ ThemeData lightMode = ThemeData(
 ThemeData darkMode = ThemeData(
   brightness: Brightness.dark,
   colorScheme: ColorScheme.dark(
-    surface: Colors.grey.shade900,
-    primary: Colors.grey.shade800,
-    secondary: Colors.grey.shade700,
-    inversePrimary: Colors.grey.shade300,
+    surface: Colors.blueGrey.shade900,
+    primary: Colors.blueGrey.shade800,
+    secondary: Colors.blueGrey.shade700,
+    inversePrimary: Colors.blueGrey.shade300,
   )
 );

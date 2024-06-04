@@ -29,23 +29,22 @@ class _NotesPageState extends State<NotesPage> {
     showDialog(
         context: context,
         builder: (context) => AlertDialog(
+          title: const Text('Add Reminder'),
           backgroundColor: Theme.of(context).colorScheme.surface,
               content: TextField(
                 controller: textController,
               ),
               actions: [
                 // create button
-                MaterialButton(
-                  onPressed: () {
-                    // add to database...
+                ElevatedButton(onPressed: (){
+                   // add to database...
                     context.read<NoteDatabase>().addNote(textController.text);
                     // clear controler
                     textController.clear();
                     // pop dialog box
                     Navigator.pop(context);
-                  },
-                  child: const Text('Create'),
-                )
+                }, child:  Text('Add', style:TextStyle(color: Theme.of(context).colorScheme.inversePrimary),),
+                ),
               ],
             ));
   }
@@ -54,8 +53,8 @@ class _NotesPageState extends State<NotesPage> {
   void readNotes() {
     context.read<NoteDatabase>().fetchNotes();
   }
+  
   // ! Update
-
   void updateNotes(Note note){
     // pre-fill th current note text
     textController.text = note.text;
@@ -63,12 +62,11 @@ class _NotesPageState extends State<NotesPage> {
       context: context,
       builder:(context) => AlertDialog(
         backgroundColor: Theme.of(context).colorScheme.surface,
-        title: const Text('Update Note'),
+        title: const Text('Update Reminder'),
               content: TextField(controller: textController,),
               actions: [
                 // update button
-                MaterialButton(
-                  onPressed: () {
+                ElevatedButton(onPressed: (){
                     // add to database...
                     context
                     .read<NoteDatabase>()
@@ -77,9 +75,8 @@ class _NotesPageState extends State<NotesPage> {
                     textController.clear();
                     // pop dialog box
                     Navigator.pop(context);
-                  },
-                  child: const Text('Update'),
-                )
+                }, child: Text('Update',  style:TextStyle(color: Theme.of(context).colorScheme.inversePrimary),),
+                ),
               ],
             )
       );
@@ -105,6 +102,7 @@ class _NotesPageState extends State<NotesPage> {
       backgroundColor: Theme.of(context).colorScheme.surface,
       
       floatingActionButton: FloatingActionButton(
+        elevation: 0,
         onPressed: createNote,
         backgroundColor: Theme.of(context).colorScheme.primary,
         child:  Icon(Icons.add, color: Theme.of(context).colorScheme.inversePrimary,),
@@ -119,7 +117,7 @@ class _NotesPageState extends State<NotesPage> {
            Padding(
             padding: const EdgeInsets.only(left:25),
             child: Text(
-              'Notes',
+              'R E M I N D E R S',
               style: GoogleFonts.dmSerifText(
                 fontSize: 48,
                 color: Theme.of(context).colorScheme.inversePrimary,
